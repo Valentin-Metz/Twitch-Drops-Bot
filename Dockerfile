@@ -9,17 +9,14 @@ COPY ./src ./src
 COPY package*.json ./
 COPY tsconfig.json ./
 
-# Don't download the bundled Chromium with Puppeteer
+# Don't download the bundled Chromium with Puppeteer (It doesn't have the required video codecs to play Twitch video streams)
 ENV PUPPETEER_SKIP_DOWNLOAD=true
 
 # Install dependencies
 RUN npm install
 
-# Install Typescript. Doesn't work without -g flag for some reason
-RUN npm install typescript -g
-
 # Compile the app
-RUN tsc
+RUN npm run compile
 
 WORKDIR /app/data
 
