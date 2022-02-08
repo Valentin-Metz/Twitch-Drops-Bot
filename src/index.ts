@@ -74,7 +74,10 @@ const options = [
     new StringOption('--cookies-path'),
     new StringOption('--log-level'),
     new BooleanOption('--show-account-not-linked-warning', false, {defaultValue: true, alias: '-sanlw'}),
-    new StringListOption("--ignored-games")
+    new StringListOption("--ignored-games"),
+    new BooleanOption("--attempt-impossible-campaigns", false, {defaultValue: true}),
+    new BooleanOption("--watch-streams-when-no-drop-campaigns-active", true, {alias: "-wswndca"}),
+    new StringListOption("--broadcasters")
 ];
 
 // Parse arguments
@@ -235,7 +238,10 @@ logger.debug('Using config: ' + JSON.stringify(printableConfig, null, 4));
         hideVideo: config['hide_video'],
         watchUnlistedGames: config['watch_unlisted_games'],
         showAccountNotLinkedWarning: config['show_account_not_linked_warning'],
-        ignoredGameIds: config['ignored_games']
+        ignoredGameIds: config['ignored_games'],
+        attemptImpossibleDropCampaigns: config['attempt_impossible_campaigns'],
+        watchStreamsWhenNoDropCampaignsActive: config["watch_streams_when_no_drop_campaigns_active"],
+        broadcasterIds: config["broadcasters"]
     });
     await bot.start();
 
